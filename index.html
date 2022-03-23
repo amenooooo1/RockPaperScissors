@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+
+</body>
+
+
+
+<script>
+    
+    game();
+    function computerPlay(randomNumber, r){
+        return r[randomNumber];
+    }
+    function singleRound(playerSelection0, computerSelection0){
+        if (computerSelection0 === 'Rock'){
+            if (playerSelection0 === 'Rock') return "It is a tie!!";
+            else if (playerSelection0 === 'Paper') return "Player Wins! Paper beats Rock";
+            else if (playerSelection0 === 'Scissors') return "Computer Wins! Rock beats Scissors";
+        }
+        else if (computerSelection0 === 'Paper'){
+            if (playerSelection0 === 'Paper') return "It is a tie!!";
+            else if (playerSelection0 === 'Rock') return "Computer Wins! Paper beats Rock";
+            else if (playerSelection0 === 'Scissors') return "Player Wins! Scissors beats Paper";
+        }
+        else {
+            if (playerSelection0 === 'Scissors') return "It is a tie!!";
+            else if (playerSelection0 === 'Rock') return "Player Wins! Rock beats Scissors";
+            else if (playerSelection0 === 'Paper') return "Computer Wins! Scissors beats Paper";
+        }
+    }
+    function game(){
+        let comScore = 0, plScore = 0;
+
+        for (let i = 0; i < 5; i++){
+            
+            let rps = ["Rock", "Paper", "Scissors"];
+            let randomNumber = Math.floor(Math.random() * rps.length);
+            let playerSelection = prompt("Please Enter R for Rock, P for Paper and S for Scissors");
+            let computerSelection = computerPlay(randomNumber, rps);
+            
+            switch(playerSelection){
+                case 'P':
+                case 'p':
+                    playerSelection = 'Paper';
+                    break;
+                case 'R':
+                case 'r':
+                    playerSelection = 'Rock';
+                    break;        
+                case 'S':
+                case 's':
+                    playerSelection = 'Scissors';
+                    break;
+                default:
+                    playerSelection = prompt("Please Enter a valid selection!");                
+            }
+            let result = singleRound(playerSelection, computerSelection);
+            console.log(result);
+            if (result[0] === 'C') comScore++;
+            else if (result[0] === 'P') plScore++;
+            //else console.log(result);
+            //randomNumber = Math.floor(Math.random() * rps.length);
+            //computerSelection = computerPlay(randomNumber, rps);
+            //playerSelection = prompt("Please Enter R for Rock, P for Paper and S for Scissors"); 
+        }
+        if (comScore !== plScore)
+        console.log(comScore>plScore ? 'Computer Wins!!' : 'Player Wins!!');
+        else console.log('It is a tieeeeeeeeeeee')
+    }
+    
+</script>
