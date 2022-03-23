@@ -3,18 +3,62 @@
 
 </head>
 <body>
+    <div style="display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; margin: 250px auto;">
+        <button id="Rock">ROCK</button>
+        <button id="Paper">PAPER</button>
+        <button id="Scissors">SCISSORS</button>
+        <div class="result"></div>
+        <div class="cscore"></div>
+        <div class="pscore"></div>
+        <div class="final"></div>
+    </div>
+    
+
 
 </body>
 
 
 
 <script>
-    
-    game();
-    function computerPlay(randomNumber, r){
-        return r[randomNumber];
+    let comScore = 0, plScore = 0;
+    const btns = document.querySelectorAll('button');
+    const div = document.querySelector('.result');
+    const divcs = document.querySelector('.cscore');
+    const divps = document.querySelector('.pscore');
+    const divf = document.querySelector('.final');
+
+
+    btns.forEach((button) => {
+        button.addEventListener('click', () => {
+            div.textContent = '';
+            divf.textContent = '';
+            div.textContent = singleRound(button.id);
+            if (div.textContent[0] === 'C') comScore++;
+            else if (div.textContent[0] === 'P') plScore++;
+            divcs.textContent = `Computer's Score : ${comScore}`;
+            divps.textContent = `Player's Score : ${plScore}`;
+            if (comScore === 5) {
+                divf.textContent = 'Computer Wins!!!!';
+                comScore = 0, plScore = 0;
+            }
+            if (plScore === 5) {
+                divf.textContent = 'Player Wins!!!!';
+                comScore = 0, plScore = 0;
     }
-    function singleRound(playerSelection0, computerSelection0){
+        
+
+            
+        });
+    });
+    
+
+    
+    
+    
+    function singleRound(playerSelection0){
+        let rps = ["Rock", "Paper", "Scissors"];
+        let randomNumber = Math.floor(Math.random() * rps.length);
+        let computerSelection0 = rps[randomNumber];
         if (computerSelection0 === 'Rock'){
             if (playerSelection0 === 'Rock') return "It is a tie!!";
             else if (playerSelection0 === 'Paper') return "Player Wins! Paper beats Rock";
@@ -30,6 +74,10 @@
             else if (playerSelection0 === 'Rock') return "Player Wins! Rock beats Scissors";
             else if (playerSelection0 === 'Paper') return "Computer Wins! Scissors beats Paper";
         }
+    }
+
+    function computerPlay(randomNumber, r){
+        return r[randomNumber];
     }
     function game(){
         let comScore = 0, plScore = 0;
